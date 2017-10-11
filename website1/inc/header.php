@@ -5,7 +5,7 @@
 	<title>Website1</title>
 </head>
 <body>
-	<!-- ul>{li>a}*3 -->
+	<!-- ul>(li>a)*3 -->
 	<ul>
 		<li><a href="index.php">Home</a></li>
 		<li><a href="about.php">About</a></li>
