@@ -9,7 +9,12 @@
 			#过滤掉不合法的字符
 			$email = filter_var($email,FILTER_SANITIZE_EMAIL);
 			echo $email;
+			echo "<hr>"."下面的是";
+			var_dump(filter_input(INPUT_POST, "data",FILTER_VALIDATE_EMAIL));
 			#验证是否是一个有效的邮箱
+			/*如果成功的话返回所请求的变量。如果过滤失败则返回 FALSE ，如果variable_name 不存在的话则返回 NULL 。 如果标示 FILTER_NULL_ON_FAILURE 被使用了，那么当变量不存在时返回 FALSE ，当过滤失败时返回 NULL 。
+
+			*/
 			if(filter_input(INPUT_POST, "data",FILTER_VALIDATE_EMAIL)){
 				echo "邮箱合法";
 			}
@@ -19,8 +24,20 @@
 		}else{
 			echo "data不存在";
 		}
+		# 类型：INPUT_GET, INPUT_POST, INPUT_COOKIE, INPUT_SERVER或 INPUT_ENV之一。
+		# filter_has_var(类型，“要检查的变量名”)检测是否存在指定类型的变量
+		# filter_var(变量，规则)使用特定的过滤器过滤一个变量
+		# filter_input(类型，“要检查的变量名”，规则) 通过名称获取特定的外部变量，并且可以通过过滤器处理它
+		# filter_input_array(类型，自己定义的数组规则变量名)获取一系列外部变量，并且可以通过过滤器处理它们
+		# filter_var_array(自己定义的数组变量，自己定义的数组规则变量名) 获取多个变量并且过滤它们
+
+		#上面这些过滤器函数都有两个作用
 		/*
-		审核
+		1.过滤，能够通过审核里的条件过滤出符合条件的，返回过滤完成的东西
+		2.验证：能够通过验证里这些条件验证，验证成功返回验证的东西，不成功返回false
+		*/
+
+		/*审核
 		FILTER_SANITIZE_EMAIL
 		FILTER_SANITIZE_ENCODED
 		FILTER_SANITIZE_MAGIC_QUOTES
@@ -109,6 +126,7 @@
 		}*/
 
 		//
+		/*
 		$arr = array(
 			"name" => "henry",
 			"age" => "30",
@@ -129,7 +147,7 @@
 			),
 			"email" => FILTER_VALIDATE_EMAIL
 		);
-		print_r(filter_var_array($arr,$filters));
+		print_r(filter_var_array($arr,$filters));*/
 
 
 	 ?>
@@ -139,7 +157,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Filters 过滤器</title>
-	<!-- <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
 </head>
 <body>
 	<div class="container">
