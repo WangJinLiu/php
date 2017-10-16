@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax1--请求纯文本</title>
+</head>
+<body>
+	<button id="button">请求纯文本</button>
+	<div id="text"></div>
+	<script>
+		document.getElementById('button').addEventListener("click",loadText);
+		//实现loadText方法
+		function loadText() {
+			//Asynchronous Javascript And XML
+			//比较流行的 axios Fetch API prototype Node API jQuery 
+			//XMLHttpRequest 对象   从客户端-服务器 HTTPS http协议   服务器-客服端 FTP协议
+			//1.对象实例化
+			var xhr = new XMLHttpRequest();
+			// console.log(xhr.readyState);
+			//2.配置对象信息 type url/file asyn(是否异步)
+			// console.log(xhr);
+
+			xhr.open("get","./sample.txt",true);
+			// console.log(xhr.readyState);
+			//3.执行处理数据的方法(2种)
+			// xhr.onload = function(){
+			// 	// console.log(this.responseText);
+			// 	if(this.status == 200){
+
+
+			// 	}
+			// 	// console.log(xhr.readyState);//4
+			// }
+			//请求处理中
+			xhr.onprogress = function(){
+				console.log("加载页面"+ this.readyState);
+			}
+			xhr.onreadystatechange = function(){
+				// console.log(this.responseText);
+				// console.log(xhr.readyState);//2,3,4
+				if(this.readyState == 4 && this.status == 200){
+					// console.log(this.responseText);//只打印一遍
+					document.getElementById("text").innerHTML = this.responseText;
+				}
+			}
+			//4发送请求
+			xhr.send();
+			
+		}
+		// 0: 请求未初始化
+		// 1: 服务器连接已建立
+		// 2: 请求已接收
+		// 3: 请求处理中
+		// 4: 请求已完成，且响应已就绪
+
+		//http(网络)状态码
+		//200:ok
+		//404:页面没找到
+	</script>
+</body>
+</html>
