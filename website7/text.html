@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text</title>
+</head>
+<body>
+	
+</body>
+<script>
+	
+	var xm = new XMLHttpRequest();
+	xm.open("get","text.php",true);
+	xm.onload=function(){
+		if(this.status == 200){
+			// console.log(this.responseText);
+			var aa = JSON.parse(this.responseText);
+			console.log(aa);
+
+		}
+	}
+	xm.send();
+</script>
+</html>
