@@ -1,0 +1,43 @@
+<!-- 这个页面的目的是请求自己建的数据库里的json数据 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax2--请求Json数据</title>
+</head>
+<body>
+	<button id="button2">请求所有数据</button>
+	<h1>所有数据</h1>
+	<div id="users"></div>
+
+</body>
+<script>
+	document.getElementById("button2").addEventListener("click",loadUsers);
+	function loadUsers(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","users.php",true);
+		xhr.onreadystatechange = function(){
+			if(this.status == 200 && this.readyState == 4){
+				// console.log(this.responseText);
+				var users = JSON.parse(this.responseText);
+				var output2 = '';
+				// for(var i in users)
+				for(var i = 0;i<users.length;i++){
+					output2 +=`
+						<ul>
+							<li>ID:${users[i].id}</li>
+							<li>Name:${users[i].name}</li>
+						</ul>
+
+					`;
+					
+
+				}
+				document.getElementById("users").innerHTML = output2;
+
+			}
+		}
+		xhr.send();
+	}
+</script>
+</html>
